@@ -31,12 +31,62 @@ void init(auto_show_t* auto_show, char* brend, char* name, int cost, int max_spe
 void Display(auto_show_t* auto_show)
 {
 
-	printf("Марка: %s\n", auto_show->autoBrend);
+	printf("\nМарка: %s\n", auto_show->autoBrend);
 	printf("Название: %s\n", auto_show->autoName);
 	printf("Стоимость: %d\n", auto_show->autoCost);
 	printf("Максимальная скорость: %d\n", auto_show->autoMax_speed);
 	printf("Год выпуска: %d\n", auto_show->autoYear);
 	printf("\n");
+
+}
+
+void deleteSpace(char* text) {
+	//Если стоит первый пробел, то удаляем его, перезаписью всех элементов слева направо
+	while (text[0] == ' ') {
+		if (text + 1)
+			strcpy(text, text + 1);
+		else
+			*text = '\0';
+	}
+}
+
+Read(auto_show_t* auto_show)
+{
+
+	puts("Введите марку автомобиля:");
+	scanf("%s", auto_show->autoBrend);
+	fflush(stdin);
+	deleteSpace(auto_show->autoBrend);
+
+	puts("Введите название автомобиля:");
+	scanf("%s", auto_show->autoName);
+	fflush(stdin);
+	deleteSpace(auto_show->autoName);
+
+
+	do {
+		puts("Введите стоимость автомобиля:");
+		while (!scanf("%d", &auto_show->autoCost)) {
+			puts("Ошибка! Введите еще раз");
+			fflush(stdin);
+		}
+	} while (auto_show->autoCost < 0);
+
+	do {
+		puts("Введите максимальную скорость автомобиля:");
+		while (!scanf("%d", &auto_show->autoMax_speed)) {
+			puts("Ошибка! Введите еще раз");
+			fflush(stdin);
+		}
+	} while (auto_show->autoMax_speed < 0);
+
+	do {
+		puts("Введите год выпуска автомобиля:");
+		while (!scanf("%d", &auto_show->autoYear)) {
+			puts("Ошибка! Введите еще раз");
+			fflush(stdin);
+		}
+	} while (auto_show->autoYear < 0 || auto_show->autoYear > 2020);
 
 }
 
@@ -53,6 +103,12 @@ int main()
 	auto_show_t first_auto;
 	init(&first_auto, "lada", "granta", 300, 150, 2017);
 	Display(&first_auto);
+
+	puts("Второй автомобиль");
+	auto_show_t second_auto;
+	Read(&second_auto);
+	Display(&second_auto);
+
 
 	return 0;
 }
