@@ -90,13 +90,19 @@ Read(auto_show_t* auto_show)
 
 }
 
+int Add(auto_show_t first_auto, auto_show_t second_auto)
+
+{
+
+	return first_auto.autoCost + second_auto.autoCost;
+
+}
 
 
 
 int main()
 {
 	setlocale(LC_ALL, "");
-	int string;
 
 	puts("Первый автомобиль");
 
@@ -108,6 +114,13 @@ int main()
 	auto_show_t second_auto;
 	Read(&second_auto);
 	Display(&second_auto);
+
+	printf("Стоимость двух автомобилей: %d\n", Add(first_auto, second_auto));
+
+	auto_show_t* auto_show;
+	auto_show = malloc(sizeof (auto_show_t));
+	free(auto_show);
+
 
 
 	return 0;
